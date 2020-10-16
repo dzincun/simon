@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Muhammad Ubaid Raza">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.js Simon Game</title>
+    <link type="text/css" href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+  </head>
+
+  <body>
+   
+    <section class="hero is-dark is-bold is-fullheight " id="simon">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">Simon Game</h1> 
+          <div class="block"></div>
+          
+          <div class="position" v-show="!message">Round {{ position }}</div>
+          <div class="position is-success" v-show="message">{{ message }}</div>
+          <div class="block"></div>
+          
+          <press key-press="a" 
+                 :freq="note" 
+                 v-for="note, index in notes" 
+                 key="index" 
+                 :id="index"
+                 :class="running ? 'is-disabled' : ''"
+                 v-on:addsound="addSound"
+                 :play-this="playSeq === index ? true : false">
+    
+          </press>
+          
+          
+          <div class="block"></div>
+          
+          <button @click="start"
+                  class="button start"
+                  :class="{run: running}">
+            {{ running ? "STOP" : "START" }}
+          </button>
+          
+          <button @click="strict = !strict"
+                  class="button strict"
+                  :class="{on: strict}">
+            Strict mode {{ strict ? "ON" : "OFF" }}
+          </button>
+          
+        </div>
+        
+      </div>
+
+    </section>
+
+
+    <!-- <script src="../node_modules/vue/dist/vue.js"></script> -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="./index.js"></script>
+  </body>
+
+</html>
